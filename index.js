@@ -38,27 +38,6 @@ async function asyncFunction(config) {
 }
 
 
-async function asyncFunction(config) {
-// Prepare headers
-    expireInSeconds = 60 * 60 // 1 hour
-    info = await eos.getInfo({})
-    chainDate = new Date(info.head_block_time + 'Z')
-    expiration = new Date(chainDate.getTime() + expireInSeconds * 1000)
-    expiration = expiration.toISOString().split('.')[0]
-
-    block = await eos.getBlock(info.last_irreversible_block_num)
-
-    transactionHeaders = {
-        expiration,
-        ref_block_num: info.last_irreversible_block_num &0xffff,
-        ref_block_prefix: block.ref_block_prefix
-    }
-// OFFLINE (bring `transactionHeaders`)'https://api1.eosdublin.io'
-    eos = Eos({httpEndpoint: null, chainId:config.chainId,keyProvider:config.keyProvider, transactionHeaders})
-    transfer = await eos.transfer('yyloveuu1314', 'williamoony5', '0.1000 EOS','',false)
-    transferTransaction = transfer.transaction
-    processedTransaction =await eos.pushTransaction(transferTransaction)
-}
 
 
 async function asyncNewAccount(config) {
@@ -110,9 +89,9 @@ asyncNewAccount(config).then(data => { console.log(data); //asyncFunction return
     }).catch(error => { console.log(error); // asyncFunction 的错误统一在这里抓取
     });
 
-/*
+
 asyncFunction(config).then(data => { console.log(data); //asyncFunction return 的内容在这里获取
  }).catch(error => { console.log(error); // asyncFunction 的错误统一在这里抓取
  });
-*/
+
 
