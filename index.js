@@ -178,7 +178,7 @@ async function asyncDelegatebw(config) {
 }
 
 
-async function asyncRefound(config) {
+async function asyncRefund(config) {
 // Prepare headers
     expireInSeconds = 60 * 60 // 1 hour
     info = await eos.getInfo({})
@@ -195,9 +195,9 @@ async function asyncRefound(config) {
     }
 // OFFLINE (bring `transactionHeaders`)'https://api1.eosdublin.io'
     eos = Eos({httpEndpoint: null, chainId:config.chainId,keyProvider:config.keyProvider, transactionHeaders})
-    transfer = await eos.refund('yyloveuu1314', false)
-    transferTransaction = transfer.transaction
-    var contents = JSON.stringify(transferTransaction);
+    refund= await eos.refund('yyloveuu1314', false)
+    refundTransaction = refund.transaction
+    var contents = JSON.stringify(refundTransaction);
     var options = {
         hostname: '127.0.0.1',
         port: 9082,
@@ -289,7 +289,7 @@ asyncunDelegatebw(config).then(data => { console.log(data); //asyncFunction retu
 asyncgetActions(config).then(data => { console.log(data); //asyncFunction return 的内容在这里获取
 }).catch(error => { console.log(error); // asyncFunction 的错误统一在这里抓取
 });*/
-asyncRefound(config).then(data => { console.log(data); //asyncFunction return 的内容在这里获取
+asyncRefund(config).then(data => { console.log(data); //asyncFunction return 的内容在这里获取
 }).catch(error => { console.log(error); // asyncFunction 的错误统一在这里抓取
 });
 
